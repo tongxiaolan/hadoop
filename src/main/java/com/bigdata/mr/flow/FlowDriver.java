@@ -1,13 +1,3 @@
-/**
- * Copyright (C), 2015-2020, 中发展信有限公司
- * FileName: FlowDriver
- * Author:   小懒
- * Date:     2020/7/9 20:07
- * Description:
- * History:
- * <author>           <version>          <desc>
- * 作者姓名            版本号              描述
- */
 package com.bigdata.mr.flow;
 
 import org.apache.hadoop.conf.Configuration;

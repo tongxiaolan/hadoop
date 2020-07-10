@@ -1,13 +1,3 @@
-/**
- * Copyright (C), 2015-2020, 中发展信有限公司
- * FileName: WholeFileRecordReader
- * Author:   小懒
- * Date:     2020/7/9 21:53
- * Description:
- * History:
- * <author>           <version>          <desc>
- * 作者姓名            版本号              描述
- */
 package com.bigdata.mr.inputformat;
 
 import org.apache.hadoop.fs.FSDataInputStream;
