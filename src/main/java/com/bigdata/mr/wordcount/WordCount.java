@@ -40,6 +40,9 @@ public class WordCount {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
+        // 设置 combiner
+        job.setCombinerClass(WordCountReduce.class);
+
         //设置输入输出数据
         FileInputFormat.setInputPaths(job,new Path(args[0]));
         FileOutputFormat.setOutputPath(job,new Path(args[1]));
