@@ -1,6 +1,8 @@
-package com.bigdata.mr.flow;
+package com.bigdata.mr.writablecomparable;
 
+import com.bigdata.mr.flow.FlowBean;
 import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -11,12 +13,12 @@ import java.io.IOException;
  * @create 2020/7/9
  * @since 1.0.0
  */
-public class FlowBean implements Writable{
+public class FlowBeanCom implements WritableComparable<FlowBeanCom>{
     private long upFlow;
     private long downFlow;
     private long sumFlow;
 
-    public FlowBean() {}
+    public FlowBeanCom() {}
 
     public void set(long upFlow,long downFlow){
         this.upFlow = upFlow;
@@ -76,5 +78,10 @@ public class FlowBean implements Writable{
         upFlow = dataInput.readLong();
         downFlow = dataInput.readLong();
         sumFlow = dataInput.readLong();
+    }
+
+    @Override
+    public int compareTo(FlowBeanCom flowBeanCom) {
+        return Long.compare(flowBeanCom.sumFlow, this.sumFlow);
     }
 }
