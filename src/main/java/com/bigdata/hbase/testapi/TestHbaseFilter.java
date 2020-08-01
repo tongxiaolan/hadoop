@@ -15,6 +15,10 @@ import java.io.IOException;
  * filter效率低,不推荐使用
  * 如果想要增加效率,可以模拟索引,即为创建关联表,以要查询的条件为rowkey,数据为rowkey.
  * 如果有多个相同的条件,可以将其rowkey放到该条数据下不同的列中.
+ * 以上方法称为二级索引,有专门的框架来做
+ *  Coprocessor  hbase官方
+ *  hindex 华为 好久没有更新
+ *  Apache Phoenix 较优方案
  * @author 小懒
  * @create 2020/7/31
  * @since 1.0.0
@@ -28,7 +32,7 @@ public class TestHbaseFilter {
 
         Scan scan = new Scan();
         //根据列族查
-        scan.addFamily(Bytes.toBytes("info"));
+//        scan.addFamily(Bytes.toBytes("info"));
 
         //单条件--------------------------------
         // 字节比较器

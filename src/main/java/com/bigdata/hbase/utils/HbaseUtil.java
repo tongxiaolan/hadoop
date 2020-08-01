@@ -41,6 +41,42 @@ public class HbaseUtil {
 
     }
 
+
+    /**
+     * 生成分区键
+     * @param regionCount
+     * @return
+     */
+    public static byte[][] getRegionKeys(int regionCount) {
+        byte[][] regionKeys = new byte[regionCount - 1][];
+        // 3==>2-1  生成分区键 0,1
+        for (int i = 0; i < regionCount - 1; i++) {
+            regionKeys[i] = Bytes.toBytes(i + "|");
+        }
+        return regionKeys;
+    }
+
+
+    /**
+     * 根据分区生成带有分区的rowKey
+     * @param rowKey
+     * @param regionCount 分区数
+     * @return
+     */
+    public static  String getRegionNum(String rowKey,int regionCount) {
+        int regionNum;
+        int hashCode = rowKey.hashCode();
+        // 2的n次方& (2的n次方-1) = 0
+        if (regionCount > 0 && (regionCount & (regionCount - 1)) == 0) {
+            // regionCount为2的n次方
+            regionNum = hashCode & (regionCount - 1);
+        }else {
+            //如果不是2的n次方，那么hash取余
+            regionNum = hashCode % (regionCount);
+        }
+        return regionNum + "_" + rowKey;
+    }
+
     /**
      * 插入数据
      * @param tablename

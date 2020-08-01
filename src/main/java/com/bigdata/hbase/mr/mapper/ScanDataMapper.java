@@ -24,6 +24,7 @@ public class ScanDataMapper extends TableMapper<ImmutableBytesWritable,Put>{
 
         // scan result => put
         Put put = new Put(key.get());
+        //把每一列加入到put中
         for (Cell cell : result.rawCells()) {
             put.addColumn(
                     CellUtil.cloneFamily(cell),
