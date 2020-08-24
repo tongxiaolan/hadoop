@@ -16,7 +16,7 @@ import java.util.Properties;
  * @create 2020/8/24
  * @since 1.0.0
  */
-public class OffsetConsumer {
+public class SyncOffsetConsumer {
     public static void main(String[] args) {
         // 创建配置信息
         Properties properties = new Properties();
@@ -26,6 +26,9 @@ public class OffsetConsumer {
         // k,v反序列化类
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+        //关闭自动提交 offset
+        properties.put("enable.auto.commit", "false");
 
         // 消费者组
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "bigdataGroup");
@@ -46,13 +49,8 @@ public class OffsetConsumer {
                 System.out.println("key--"+record.key()+" --value--"+record.value()+" --partiton--"+record.partition() +" --offset--"+record.offset());
             }
 
-
             // 同步提交 当前线程会阻塞到提交完成
             consumer.commitSync();
-
-            // 异步提交 TODO
-
-
         }
     }
 }
