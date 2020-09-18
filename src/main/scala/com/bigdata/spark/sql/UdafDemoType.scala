@@ -20,8 +20,9 @@ object UdafDemoType {
     // 创建聚合函数对象
     val udaf = new MyAgeAvgFunctionByType
 
-    //将聚合函数转换为查询的列
+    //将聚合函数转换为查询的列 因为输入类型为userBean 所以没有办法用sql查询
     val avgCol = udaf.toColumn.name("avgAge")
+    //查询
     userDs.select(avgCol).show
     /*
     结果
